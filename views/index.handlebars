@@ -46,7 +46,7 @@
           </a>
           <div class="card-footer text-right">
             <a href="/restaurants/{{ this.id }}/edit" class="btn btn-primary">編輯</a>
-            <form action="/restaurants/{{ this.id }}/delete" method="post" style="display: inline;">
+            <form action="/restaurants/{{ this.id }}/delete?_method=DELETE" method="post" style="display: inline;">
               <button type="button" class="btn btn-danger" data-toggle="modal"
                 data-target="#delete{{ this.id }}">刪除</button>
               <!-- Modal -->

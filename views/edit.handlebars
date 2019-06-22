@@ -1,6 +1,6 @@
 <h1 class="mb-1 restaurant-show-title">修改{{restaurant.name}}</h1>
 <div class="container">
-  <form action="/restaurants/{{restaurant.id}}" method="POST">
+  <form action="/restaurants/{{restaurant.id}}?_method=PUT" method="POST">
     <!-- 餐廳名稱、categor -->
     <div class="form-group row">
       <label class="col">

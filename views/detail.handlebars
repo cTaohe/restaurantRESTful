@@ -37,7 +37,7 @@
         style="max-width: 600px;">
       <div class="text-center">
         <a href="/restaurants/{{ restaurant.id }}/edit" class="btn btn-primary">編輯</a>
-        <form action="/restaurants/{{ restaurant.id }}/delete" method="post" style="display: inline;">
+        <form action="/restaurants/{{ restaurant.id }}/delete?_method=DELETE" method="post" style="display: inline;">
           <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete{{ restaurant.id }}">刪除</button>
           <!-- Modal -->
           <div class="modal fade" id="delete{{ restaurant.id }}" tabindex="-1" role="dialog">
@@ -50,10 +50,11 @@
                   </button>
                 </div>
                 <div class="modal-body text-center">
-                  你將要刪除 <span class="text-danger">"{{ restaurant.name }}"<span>。
+                  你將要刪除
+                  <span class="text-danger">"{{ restaurant.name }}"<span>。
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
                   <button type="submit" class="btn btn-danger">確認刪除</button>
                 </div>
               </div>

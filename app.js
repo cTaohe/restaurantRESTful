@@ -3,20 +3,20 @@ const express = require('express')
 const app = express()
 const port = 3000
 const exphbs = require('express-handlebars')
-
+const methodOverride = require('method-override')
 const Restaurant = require('./models/restaurant.js')
 
 // setting mongoose
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/restaurant', { useNewUrlParser: true })
 const db = mongoose.connection
-
 db.on('error', () => {
   console.log('mongoose error')
 })
 db.once('open', () => {
   console.log('mongoose connected')
 })
+
 // setting static page
 app.use(express.static('public'))
 
@@ -24,6 +24,8 @@ app.use(express.static('public'))
 app.engine('handlebars', exphbs({ defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
 
+// use method override
+app.use(methodOverride('_method'))
 
 // body-parser
 const bodyParser = require('body-parser')
@@ -91,7 +93,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
 })
 
 // 編輯餐廳
-app.post('/restaurants/:id', (req, res) => {
+app.put('/restaurants/:id', (req, res) => {
   Restaurant.findById(req.params.id, (err, restaurant) => {
     if (err) return console.error(err)
     Object.assign(restaurant, req.body)
@@ -103,7 +105,7 @@ app.post('/restaurants/:id', (req, res) => {
 })
 
 // 刪除餐廳
-app.post('/restaurants/:id/delete', (req, res) => {
+app.delete('/restaurants/:id/delete', (req, res) => {
   Restaurant.findById(req.params.id, (err, restaurant) => {
     if (err) return console.error(err)
     restaurant.remove(err => {
