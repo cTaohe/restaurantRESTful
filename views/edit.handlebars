@@ -20,7 +20,7 @@
       </label>
       <label class="col">
         電話:
-        <input type="text" class="form-control" name="phone" placeholder="02 0000 0000" value="{{restaurant.phone}}" required>
+        <input type="text" class="form-control" name="phone" pattern="\d{2}\s{1}\d{4}\s{1}\d{4}" placeholder="02 0000 0000" value="{{restaurant.phone}}" required>
       </label>
     </div>
     <div class="form-group row">
@@ -32,7 +32,8 @@
     <div class="form-group row">
       <label class="col">
         Google Map:
-        <input type="text" class="form-control" name="google_map" placeholder="Google Map URL" value="{{restaurant.google_map}}" required>
+        <input type="text" class="form-control" name="google_map" pattern="(http|https):\/\/([\w.]+\/?)\S*"
+        placeholder="以 https:// 開頭" value="{{restaurant.google_map}}" required>
       </label>
     </div>
     <!-- image、google_map、description -->
@@ -43,7 +44,8 @@
       </label>
       <label class="col">
         圖片:
-        <input type="url" class="form-control" name="image" placeholder="http://example.com/image/image.jpg" value="{{restaurant.image}}" required>    
+        <input type="url" class="form-control" name="image" pattern="(http|https):\/\/([\w.]+\/?)\S*"
+        placeholder="以 https:// 開頭" value="{{restaurant.image}}" required>    
       </label>
     </div>
     <div class="form-group">

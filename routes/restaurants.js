@@ -10,7 +10,7 @@ router.get('/search', (req, res) => {
     if (err) return console.error(err)
     const restaurant = restaurants.filter(({name, name_en, category}) => {
       return [name, name_en, category].some(str => hasStr(str, keyword))
-    })   
+    })
     return res.render('index', {restaurants: restaurant})
   })
 })

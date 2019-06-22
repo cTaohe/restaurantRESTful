@@ -3,7 +3,7 @@
   <div class="container search-bar col-6">
     <div class="search-bar-outer">
       <div class="search-bar-inner">
-        <form action="/search">
+        <form action="/restaurants/search">
           <div class="input-group">
             <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..."
               value="{{ keyword }}" aria-describedby="search-button">
@@ -17,7 +17,7 @@
   </div>
   <div class="container dropdown col-6 d-flex justify-content-end align-items-end">
     <button class="btn btn-warning dropdown-toggle" data-toggle="dropdown">排序</button>
-    <div class="dropdown-menu">
+    <div class="dropdown-menu bg-warning">
       <a href="/restaurants/sort?name_en=asc" class="dropdown-item">A -> Z</a>
       <a href="/restaurants/sort?name_en=desc" class="dropdown-item">Z -> A</a>
       <a href="/restaurants/sort?rating=-1" class="dropdown-item">評價高到低</a>
