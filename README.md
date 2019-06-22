@@ -23,6 +23,7 @@
 ```
 nvm install 10.15.3
 git clone https://github.com/cTaohe/restaurantRESTful.git
+cd restaurantRESTful
 npm install
 ```
 
