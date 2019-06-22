@@ -31,89 +31,9 @@ app.use(methodOverride('_method'))
 const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: true }))
 
-// 首頁
-app.get('/', (req, res) => {
-  Restaurant.find((err, restaurants) => {
-    if (err) return console.error(err)
-    return res.render('index', {restaurants: restaurants})
-  })
-})
-
-// search
-app.get('/search', (req,res) => {
-  Restaurant.find((err, restaurants) => {
-    const keyword = req.query.keyword
-    const hasStr = (target, str) => target.toLowerCase().includes(str.toLowerCase())
-    if (err) return console.error(err)
-    const restaurant = restaurants.filter(({name, name_en, category}) => {
-      return [name, name_en, category].some(str => hasStr(str, keyword))
-    })   
-    return res.render('index', {restaurants: restaurant})
-  })
-})
-
-// 新增餐廳頁面
-app.get('/restaurants/new', (req, res) => {
-  res.render('new')
-})
-
-// Detail
-app.get('/restaurants/:id', (req, res) => {
-  Restaurant.findById(req.params.id, (err, restaurant) => {
-    if (err) return console.error(err)
-    return res.render('detail', {restaurant: restaurant})
-  })
-})
-
-// 新增一個餐廳
-app.post('/restaurants', (req, res) => {
-  const restaurant = Restaurant({
-    name: req.body.name,
-    name_en: req.body.name_en,
-    category: req.body.category,
-    image: req.body.image,
-    location: req.body.location,
-    phone: req.body.phone,
-    google_map: req.body.google_map,
-    rating: req.body.rating,
-    description: req.body.description
-  })
-  restaurant.save(err => {
-    if (err) return console.error(err)
-    return res.redirect('/')
-  })
-})
-
-// 編輯餐廳頁面
-app.get('/restaurants/:id/edit', (req, res) => {
-  Restaurant.findById(req.params.id, (err, restaurant) => {
-    if (err) return console.error(err)
-    return res.render('edit', {restaurant: restaurant})
-  })
-})
-
-// 編輯餐廳
-app.put('/restaurants/:id', (req, res) => {
-  Restaurant.findById(req.params.id, (err, restaurant) => {
-    if (err) return console.error(err)
-    Object.assign(restaurant, req.body)
-    restaurant.save(err => {
-      if (err) return console.error(err)
-      return res.redirect(`/restaurants/${req.params.id}`)
-    })
-  })
-})
-
-// 刪除餐廳
-app.delete('/restaurants/:id/delete', (req, res) => {
-  Restaurant.findById(req.params.id, (err, restaurant) => {
-    if (err) return console.error(err)
-    restaurant.remove(err => {
-      if (err) return console.error(err)
-      return res.redirect('/')
-    })
-  })
-})
+// 載入路由器
+app.use('/', require('./routes/home.js'))
+app.use('/restaurants', require('./routes/restaurants.js'))
 
 // start and listen the server
 app.listen(port, () => {
