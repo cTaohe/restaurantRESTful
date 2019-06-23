@@ -1,6 +1,6 @@
 const Restaurant = require('./models/restaurant.js')
 
-exports.sort = (req, res) => {
+function sort(req, res) {
   const sortRestaurant = req.query
   Restaurant.find()
   .sort(sortRestaurant)
@@ -9,3 +9,5 @@ exports.sort = (req, res) => {
     return res.render('index', {restaurants: restaurants})
   })
 }
+
+module.exports = sort

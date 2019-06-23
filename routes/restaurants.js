@@ -16,9 +16,7 @@ router.get('/search', (req, res) => {
 })
 
 // sort restaurant
-router.get('/', (req, res) => {
-  helper.sort(req, res)
-})
+router.get('/', (req, res) => helper(req, res))
 
 // 新增餐廳頁面
 router.get('/new', (req, res) => {
@@ -35,17 +33,10 @@ router.get('/:id', (req, res) => {
 
 // 新增一個餐廳
 router.post('/', (req, res) => {
-  const restaurant = Restaurant({
-    name: req.body.name,
-    name_en: req.body.name_en,
-    category: req.body.category,
-    image: req.body.image,
-    location: req.body.location,
-    phone: req.body.phone,
-    google_map: req.body.google_map,
-    rating: req.body.rating,
-    description: req.body.description
-  })
+  const restaurant = new Restaurant()
+  for (let i in req.body) {
+    restaurant[i] = req.body[i]
+  }
   restaurant.save(err => {
     if (err) return console.error(err)
     return res.redirect('/')
