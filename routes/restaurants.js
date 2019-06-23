@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Restaurant = require('../models/restaurant.js')
-
+const helper = require('../helper.js')
 // search
 router.get('/search', (req, res) => {
   Restaurant.find((err, restaurants) => {
@@ -15,14 +15,9 @@ router.get('/search', (req, res) => {
   })
 })
 
-router.get('/sort', (req, res) => {
-  const sortRestaurant = req.query
-  Restaurant.find()
-  .sort(sortRestaurant)
-  .exec((err, restaurants) => {
-    if (err) return console.error(err)
-    return res.render('index', {restaurants: restaurants})
-  })
+// sort restaurant
+router.get('/', (req, res) => {
+  helper.sort(req, res)
 })
 
 // 新增餐廳頁面
